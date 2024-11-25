@@ -1,0 +1,35 @@
+# Ignore Jupyter notebook checkpoint files
+.ipynb_checkpoints/
+
+# Ignore hidden and temporary files
+*.swp
+*.swo
+*.bak
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Ignore local Jupyter configurations
+.jupyter/
+.local/
+.python-version
+
+# Ignore execution output files
+*.out
+*.log
+
+# Ignore virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# Ignore installed dependencies
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore IDE configuration files
+.idea/
+.vscode/
