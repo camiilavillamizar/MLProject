@@ -53,6 +53,27 @@
     text-align: center;
  }
 
+ .loading{
+    min-width: 600px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+ }
+ .error{
+    color: red; 
+    margin-left: 100px;
+ }
+
+.diagnosis{
+    width: 200px;
+    margin: 50px 0;
+}
+
+.images{
+    display: flex;
+    justify-content: center;
+}
 @media (min-width: 1114px) {
     .blank-section{
         width: 20%;

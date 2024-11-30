@@ -1,6 +1,7 @@
 <div >
     <div class="scan-section">
-        <div class="text-container">
+
+        <div class="text-container" *ngIf="state == 'initial'">
             <h1>Attach the image</h1>
             <p>Attach an image of your dog's skin to predict the type of skin disease </p>
 
@@ -19,11 +20,31 @@
                   accept="image/jpeg, image/png"
                   style="display: none;"
                 />
-              </div>
-              
-
-            
+              </div> 
         </div>
+
+        <div class="text-container loading" *ngIf="state == 'loading'">
+            <p>Loading...</p>
+            <app-loading class="pet-loading"></app-loading>
+        </div>
+
+        <div class="text-container" *ngIf="state == 'processed'">
+            <h1>Diagnosis: {{diagnosis}}</h1>
+            <div class="images">
+                <img class="diagnosis" [src]="images[diagnosis]">
+                <img class="diagnosis" [src]="selectedImage">
+            </div>
+            
+            <button mat-raised-button (click)="tryAgain()">Try Again</button>
+        </div>
+
+        <div class="text-container error" *ngIf="state == 'error'">
+            <h1>Error!</h1>
+            <p>{{error}}</p>
+            <button mat-raised-button (click)="tryAgain()">Try Again</button>
+        </div>
+
+
         <div class="blank-section"></div>
     </div>
 
