@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ScanService } from './scan.service';
 import { NgxFileDropEntry } from 'ngx-file-drop';
+import { BackResponse } from './response.interface';
 
 @Component({
   selector: 'app-scan',
@@ -14,15 +15,18 @@ export class ScanComponent {
   state: string = "initial"; 
   error: string = ""
   actualFile: File | undefined ;
-  diagnosis: string = ""; 
+  response: BackResponse = {
+    prediction: '',
+    confidence: 0
+  }
   selectedImage: string | undefined; 
 
   images: {[key: string]: string} = {
-    'parasites': 'parasite.jpg',
-    'infection': 'infection.jpeg',
-    'autoimmune': 'autoimmune.jpeg',
-    'healthy': 'dogs-2.jpeg', 
-    'allergy': 'allergy.jpg'
+    'Parasites': 'parasite.jpg',
+    'Infectious': 'infection.jpeg',
+    'Autoimmune': 'autoimmune.jpeg',
+    'Healthy': 'dogs-2.jpeg', 
+    'Allergies': 'allergy.jpg'
 
   }
   constructor(private scanService: ScanService){}
@@ -71,6 +75,7 @@ export class ScanComponent {
     this.scanService.getDisease(file).subscribe(
       res => {
         console.log("Success! Disease: ", res)
+        this.response = res
         this.state = "processed"
       }, 
       error => {
@@ -85,7 +90,10 @@ export class ScanComponent {
     this.state = "initial"
     this.error = ""
     this.actualFile = undefined; 
-    this.diagnosis = ""; 
+    this.response = {
+      prediction: '',
+      confidence: 0
+    }
     this.selectedImage = undefined; 
   }
 }
