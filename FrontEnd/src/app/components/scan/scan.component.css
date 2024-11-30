@@ -1,0 +1,60 @@
+.container{
+
+}
+.scan-section{
+    height: 700px;
+    background-image: url("../../../../public/healthy-dog.jpg");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    display: flex;
+    padding: 1%;
+}
+
+.blank-section{
+    width: 0;
+}
+.text-container{
+    padding:0; 
+    height: 100%; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center
+}
+.scan-section h1{
+    font-size: 60px;
+    font-weight: 700px;
+    font-family: "Merriweather", serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.scan-section p{
+    font-weight: 300;
+    font-size: 25px;
+    margin: 15px 0;
+    font-family: "Merriweather", serif;
+    font-weight: 300;
+    font-style: normal;
+}
+.upload-button{
+    width: 300px;
+    background-color: var(--dark-purple);
+    color: white;
+    font-family: "Merriweather", serif;
+    font-weight: 300;
+    font-style: normal;
+    display: flex;
+}
+ .center-alert{
+    text-align: center;
+ }
+
+@media (min-width: 1114px) {
+    .blank-section{
+        width: 20%;
+    }
+}

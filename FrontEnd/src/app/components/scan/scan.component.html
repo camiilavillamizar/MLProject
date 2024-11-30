@@ -1,0 +1,35 @@
+<div >
+    <div class="scan-section">
+        <div class="text-container">
+            <h1>Attach the image</h1>
+            <p>Attach an image of your dog's skin to predict the type of skin disease </p>
+
+            <div class="file-drop" ngxFileDrop (onFileDrop)="onFileDropped($event)">
+                <!-- Button triggers the input -->
+                <button mat-fab class="upload-button" (click)="fileInput.click()">
+                  <span>Upload Image or dropp it here</span>
+                  <mat-icon>image</mat-icon>
+                </button>
+              
+                <!-- Hidden file input -->
+                <input
+                  type="file"
+                  #fileInput
+                  (change)="onFileSelected($event)"
+                  accept="image/jpeg, image/png"
+                  style="display: none;"
+                />
+              </div>
+              
+
+            
+        </div>
+        <div class="blank-section"></div>
+    </div>
+
+    <div class="alert alert-warning center-alert" role="alert">
+        Please Note: This model has an accuracy of XX%, 
+        so some predictions may not fully represent actual conditions. 
+        Kindly keep this in mind when interpreting the results.
+    </div>
+</div>
