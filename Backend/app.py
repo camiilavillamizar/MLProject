@@ -6,20 +6,17 @@ import numpy as np
 import os
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+CORS(app) 
 
-# Load the model
 model = tf.keras.models.load_model("../best_model.keras")
 
-# Define class names based on your dataset
 CLASS_NAMES = [
     "Allergies",
     "Autoimmune",
     "Healthy",
     "Infectious",
     "Parasites",
-]  # Replace with your actual class names
-
+] 
 
 def preprocess_image(image):
     # Resize and preprocess image same as training
