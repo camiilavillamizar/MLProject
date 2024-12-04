@@ -6,28 +6,36 @@ import numpy as np
 import os
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+CORS(app)  # Enabling CORS for all routes
 
-# Load the model
-model = tf.keras.models.load_model("../best_model.keras")
+#Loading the best model model
+MODEL_PATH = os.path.abspath("../best_model_tunned.keras")  
+try:
+    model = tf.keras.models.load_model(MODEL_PATH)
+except Exception as e:
+    print(f"Error loading model from {MODEL_PATH}: {e}")
+    raise e
 
-# Define class names based on your dataset
+#Defining our class names 
 CLASS_NAMES = [
     "Allergies",
     "Autoimmune",
     "Healthy",
     "Infectious",
     "Parasites",
-]  # Replace with your actual class names
-
+]  
 
 def preprocess_image(image):
-    # Resize and preprocess image same as training
-    img = image.resize((244, 244))
-    img_array = tf.keras.preprocessing.image.img_to_array(img)
-    img_array = tf.expand_dims(img_array, 0)
-    img_array = img_array / 255.0
-    return img_array
+    try:
+        #Resizing and preprocesing image same as training
+        img = image.resize((224, 224))  
+        img_array = tf.keras.preprocessing.image.img_to_array(img)
+        img_array = tf.expand_dims(img_array, 0)
+        img_array = img_array / 255.0
+        return img_array
+    except Exception as e:
+        print(f"Error preprocessing image: {e}")
+        raise e
 
 
 @app.route("/predict", methods=["POST"])
@@ -37,8 +45,11 @@ def predict():
 
     file = request.files["file"]
     try:
+        # Open and preprocess the image
         image = Image.open(file)
         processed_image = preprocess_image(image)
+
+        # Make predictions
         predictions = model.predict(processed_image)
         predicted_class = CLASS_NAMES[np.argmax(predictions[0])]
         confidence = float(np.max(predictions[0]))
@@ -50,8 +61,10 @@ def predict():
             }
         )
     except Exception as e:
+        print(f"Error during prediction: {e}")
         return jsonify({"error": str(e)}), 500
 
 
 if __name__ == "__main__":
+    # Run Flask app in debug mode
     app.run(debug=True, port=5000)
